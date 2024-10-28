@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Payment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #D2A15F;
+    }
+    .payment-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      width: 400px;
+    }
+    .total-amount {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .address-form input,
+    .address-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .payment-options {
+      margin-top: 20px;
+    }
+    .payment-options label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .qr-code {
+      margin: 20px 0;
+      display: none;
+    }
+    .pay-now-btn {
+      background-color: #000;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: block;
+      margin: 20px auto;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-align: center;
+    }
+    .pay-now-btn:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pay with QR Code</h1>
+  <div class="payment-container">
+    <p class="total-amount">Total: Rs. <span id="totalAmount">0</span></p>
+
+    <!-- Address Form -->
+    <div class="address-form">
+      <h3>Shipping Address</h3>
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="text" id="address" placeholder="Address" required>
+      <input type="text" id="city" placeholder="City" required>
+      <input type="text" id="postalCode" placeholder="Postal Code" required>
+      <input type="text" id="phone" placeholder="Phone Number" required>
+    </div>
+
+    <!-- Payment Options -->
+    <div class="payment-options">
+      <h3>Select Payment Method</h3>
+      <label>
+        <input type="radio" name="paymentMethod" value="qr" checked> UPI QR Code
+      </label>
+      <label>
+        <input type="radio" name="paymentMethod" value="card"> Credit/Debit Card
+      </label>
+      <label>
+        <input type="radio" name="paymentMethod" value="paypal"> PayPal
+      </label>
+    </div>
+
+    <!-- QR Code Display (For UPI) -->
+    <img id="qrCode" class="qr-code" src="" alt="QR Code" width="200">
+
+    <button class="pay-now-btn" onclick="completePayment()">Complete Payment</button>
+  </div>
+
+  <script>
+    // Get the total amount from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      let totalAmount = localStorage.getItem('totalAmount');
+      
+      // Check if totalAmount exists and is not null
+      if (totalAmount) {
+        document.getElementById('totalAmount').textContent = totalAmount;
+      } else {
+        alert('Total amount not found! Please go back to the cart.');
+      }
+      
+      // Event listener to generate QR code if UPI is selected
+      document.querySelector('input[name="paymentMethod"][value="qr"]').addEventListener('change', function() {
+        generateQRCode(totalAmount);
+      });
+
+      // Event listener to hide QR code when other methods are selected
+      document.querySelectorAll('input[name="paymentMethod"]').forEach(input => {
+        input.addEventListener('change', function() {
+          if (this.value === 'qr') {
+            generateQRCode(totalAmount);
+          } else {
+            document.getElementById('qrCode').style.display = 'none';
+          }
+        });
+      });
+
+      generateQRCode(totalAmount); // Generate QR by default for UPI
+    });
+
+    // Generate the QR code for UPI payments
+    function generateQRCode(amount) {
+      let paymentLink = `upi://pay?pa=your-vpa@upi&pn=Your+Shop+Name&am=${amount}&cu=INR`;
+      
+      // Use Google Charts API to generate QR code
+      let qrCodeUrl = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(paymentLink)}`;
+      
+      let qrCodeElement = document.getElementById('qrCode');
+      qrCodeElement.src = qrCodeUrl;
+      qrCodeElement.style.display = 'block'; // Show the QR code
+    }
+
+    // Simulate payment completion
+    function completePayment() {
+      let paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+      let address = `
+        Name: ${document.getElementById('name').value}
+        Address: ${document.getElementById('address').value}
+        City: ${document.getElementById('city').value}
+        Postal Code: ${document.getElementById('postalCode').value}
+        Phone: ${document.getElementById('phone').value}
+      `;
+
+      if (paymentMethod === 'qr') {
+        alert('Payment completed for Rs. ' + localStorage.getItem('totalAmount') + ' via UPI QR Code.\n' + address);
+      } else if (paymentMethod === 'card') {
+        alert('Payment completed for Rs. ' + localStorage.getItem('totalAmount') + ' via Credit/Debit Card.\n' + address);
+      } else if (paymentMethod === 'paypal') {
+        alert('Payment completed for Rs. ' + localStorage.getItem('totalAmount') + ' via PayPal.\n' + address);
+      }
+
+      // You can add a card payment process or PayPal integration here if necessary
+
+      localStorage.removeItem('cart'); // Clear the cart after payment
+      localStorage.removeItem('totalAmount'); // Clear the total amount
+      window.location.href = 'success.html'; // Redirect to a success page
+    }
+  </script>
+
+</body>
+</html>

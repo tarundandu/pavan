@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .header img {
+            max-width: 100%;
+            height: auto;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .product {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .product h2 {
+            font-size: 18px;
+            margin: 0;
+        }
+        .product p {
+            color: #777;
+            margin: 5px 0;
+        }
+        .price {
+            font-weight: bold;
+            color: #000;
+            margin: 5px 0;
+        }
+        .stars {
+            color: gold;
+            margin-bottom: 10px;
+        }
+        .cart-btn {
+            display: inline-block;
+            background-color: #000;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="honey-jar.jpg" alt="Premium Products">
+    </div>
+
+    <div class="container">
+        <h1>Discover Our Premium Range & Enjoy True Taste</h1>
+        
+        <div class="products">
+            <div class="product">
+                <img src="ghee.jpg" alt="A2 Desi Cow Ghee">
+                <h2>A2 Desi Cow Ghee</h2>
+                <p class="price">From Rs. 999.00</p>
+                <p class="stars">★★★★★</p>
+                <a href="#" class="cart-btn">Add to Cart</a>
+            </div>
+            <div class="product">
+                <img src="honey.jpg" alt="Natural Honey">
+                <h2>Natural Honey</h2>
+                <p class="price">From Rs. 409.00</p>
+                <p class="stars">★★★★★</p>
+                <a href="#" class="cart-btn">Add to Cart</a>
+            </div>
+            <div class="product">
+                <img src="hair-oil.jpg" alt="Herbal Hair Oil">
+                <h2>Herbal Hair Oil</h2>
+                <p class="price">From Rs. 375.00</p>
+                <p class="stars">★★★★☆</p>
+                <a href="#" class="cart-btn">Add to Cart</a>
+            </div>
+            <div class="product">
+                <img src="shikakai-shampoo.jpg" alt="REETHA SHIKAKAI Herbal Shampoo">
+                <h2>REETHA SHIKAKAI Herbal Shampoo</h2>
+                <p class="price">From Rs. 529.00</p>
+                <p class="stars">★★★★★</p>
+                <a href="#" class="cart-btn">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

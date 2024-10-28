@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Roots - Product</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .navbar {
+      background-color: #D2A15F; /* Main background color */
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2C5F2D;
+    }
+
+    .tagline {
+      font-size: 12px;
+      color: #2C5F2D;
+    }
+
+    .icon {
+      font-size: 24px;
+      color: black;
+      margin-left: 15px;
+      cursor: pointer;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      color: black;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .menu-dropdown {
+      display: none;
+      position: absolute;
+      top: 60px; /* Ensures it appears below the navbar */
+      left: 0;
+      width: 100%; /* Stretch the dropdown to full width */
+      background-color: #D2A15F;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    .menu-dropdown a {
+      display: block;
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .menu-dropdown a:hover {
+      background-color: #b97d2c; /* Darker ochre */
+    }
+
+    .menu-dropdown.show {
+      display: block;
+    }
+
+    /* Search Bar Section */
+    #searchBar {
+      display: none; /* Initially hidden */
+      background-color: #fff;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 999; /* Ensures it appears on top */
+    }
+
+    #searchBar input {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    #searchBar button {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #searchBar button:hover {
+      background-color: #218838;
+    }
+
+    /* Product section */
+    .product-section {
+      position: relative;
+      text-align: center;
+      color: white;
+    }
+
+    .product-image {
+      width: 100%;
+      height: auto;
+    }
+
+    .product-text {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .product-subtext {
+      font-size: 24px;
+    }
+
+    .shop-now-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .shop-now-btn:hover {
+      background-color: #45a049;
+    }
+
+    /* General page styling */
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .product {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: calc(25% - 20px); /* 4 items per row with a gap */
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product h2 {
+      font-size: 18px;
+      color: #333;
+      margin: 15px 0 10px;
+    }
+
+    .price {
+      font-size: 16px;
+      color: #28a745;
+      margin: 5px 0;
+    }
+
+    .stars {
+      font-size: 14px;
+      color: #f39c12;
+    }
+
+    .cart-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .cart-btn:hover {
+      background-color: #218838;
+    }
+
+    @media (max-width: 768px) {
+      .product {
+        width: calc(50% - 20px); /* 2 items per row on tablets */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product {
+        width: 100%; /* 1 item per row on mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar Section -->
+  <div class="navbar">
+    <div class="menu-icon" onclick="toggleDropdown()">☰</div>
+
+    <div class="logo-container">
+      <img src="C:\Users\tarun varma\Downloads\WhatsApp Image 2024-09-11 at 18.46.14_838fbf23.jpg"s alt="Logo">
+      <div>
+        <div class="logo-text">GREEN ROOTS</div>
+        <div class="tagline">Elevate Your Health</div>
+      </div>
+    </div>
+
+    <div>
+      <span class="icon" onclick="toggleSearch()">🔍</span>
+    <a href="rammain.html"> 
+      <span class="icon" onclick="addToCart()">🛒</span>
+      </a>
+      
+    </div>
+    
+    <!-- Dropdown Menu -->
+    <div class="menu-dropdown" id="dropdownMenu">
+      <a href="index.html">Home</a>
+      <a href="shopall.html">Shop All</a>
+      <a href="about us.html">About Us</a>
+      <a href="trackorder.html">Track Your Order</a>
+    </div>
+  </div>
+
+  <!-- Search Bar Section -->
+  <div id="searchBar">
+    <input type="text" placeholder="Search...">
+    <button>Search</button>
+  </div>
+
+  <!-- Product Section -->
+  <div class="product-section">
+    <img src="C:\Users\tarun varma\Downloads\WhatsApp Image 2024-09-11 at 18.46.14_838fbf23.jpg" alt="Product" class="product-image">
+    <div class="product-text">NATURE'S PROMISE</div>
+    <div class="product-subtext">100% PURE</div>
+    <button class="shop-now-btn">SHOP NOW</button>
+  </div>
+
+  <div class="container">
+    <h1>Discover Our Products</h1>
+    <div class="products">
+      <div class="product">
+        <img src="C:\Users\Pavan\Downloads\ghee image.jpg" alt="Organic Ghee">
+        <h2>Organic Ghee</h2>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="price">₹500</p>
+        <a href="desighee.html" class="cart-btn">Buy now</a>
+      </div>
+      <div class="product">
+        <img src="C:\Users\Pavan\Downloads\-honey.jpg" alt="Organic Honey">
+        <h2>Organic Honey</h2>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="price">₹400</p>
+        <a href="naturalhoney.html" class="cart-btn">Buy now</a>
+      </div>
+<div class="product">
+        <img src="C:\Users\Pavan\Downloads\shikakai-benefits-for-hair_long-infographic.jpg"  alt="organic hairoil">
+        <h2>organic hairoil</h2>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="price">rs 400/-</p>
+        <a href="herbalhairoil.html" class="cart-btn">Buy now</a>
+      </div>
+<div class="product">
+        <img src="C:\Users\Pavan\Downloads\WhatsApp Image 2024-09-11 at 22.19.03_e37e43a9.jpg"alt="organic hair shampoo">
+        <h2>organic hair shampoo</h2>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="price">rs 500/-</p>
+     
+<a href="shikakai.html" class="cart-btn">Buy now</a>
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+    // Toggle the dropdown menu
+    function toggleDropdown() {
+      var dropdownMenu = document.getElementById("dropdownMenu");
+      dropdownMenu.classList.toggle("show");
+    }
+
+    // Toggle the search bar display
+    function toggleSearch() {
+      var searchBar = document.getElementById("searchBar");
+      if (searchBar.style.display === "block") {
+        searchBar.style.display = "none";
+      } else {
+        searchBar.style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>

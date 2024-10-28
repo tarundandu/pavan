@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - GreenRoots Organic Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f5e0; /* Very light ochre background */
+        }
+        header {
+            background-color: #d6a43d; /* Ochre */
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .product-image {
+            flex: 1;
+            min-width: 400px;
+            max-width: 600px;
+            margin-right: 20px;
+        }
+        .product-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .product-details {
+            flex: 1;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        h2 {
+            color: #b97d2c; /* Darker ochre */
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #9b6d1f; /* Ochre brown */
+        }
+        .price {
+            color: #e4a835; /* Rich ochre */
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .quantity {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .quantity label {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .quantity input {
+            width: 60px;
+            padding: 5px;
+            font-size: 18px;
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            gap: 20px; /* Add gap between buttons */
+        }
+        .btn {
+            background-color: #d6a43d; /* Ochre */
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            max-width: 200px;
+        }
+        .btn:hover {
+            background-color: #b97d2c; /* Darker ochre */
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .product-image {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>GreenRoots Organic Products</h1>
+</header>
+
+<a href="tarun.html"><button class="btn">Home</button></a>
+
+<div class="container">
+    <!-- Product Image Section -->
+    <div class="product-image">
+        <img src="C:/Users/Pavan/Downloads/ghee image.jpg" alt="Organic ghee">
+    </div>
+
+    <!-- Product Details Section -->
+    <div class="product-details">
+        <h2>A2 Desi Cow Ghee</h2>
+        <p>
+            Fresh, A2 Desi Cow Ghee without the use of chemicals.
+        </p>
+        <p class="price">Price: ₹999 per kg</p>
+
+        <!-- Quantity Selection -->
+        <div class="quantity">
+            <label for="quantity">Quantity (kg):</label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1" max="10">
+        </div>
+
+        <!-- Buttons Section -->
+        <div class="button-container">
+            <!-- Add to Cart Button -->
+            <button class="btn" onclick="addToCart('A2 Desi Cow Ghee', 999)">Add to Cart</button>
+
+            <!-- Buy Now Button -->
+            <a href="ghee_buynow.html"><button class="btn">Buy Now</button></a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// Function to add the product to the cart
+function addToCart(productName, price) {
+    let quantity = document.getElementById("quantity").value;
+
+    // Retrieve cart data from localStorage or create a new cart
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Add product to the cart
+    cart.push({ product: productName, price: price, quantity: quantity });
+
+    // Save updated cart back to localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Redirect to the main cart page
+    window.location.href = "rammain.html";
+}
+</script>
+
+</body>
+</html>

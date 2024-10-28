@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #D2A15F;
+    }
+    .cart-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    .item-name {
+      font-weight: bold;
+    }
+    .item-price {
+      color: #555;
+    }
+    .total-price {
+      font-weight: bold;
+      font-size: 24px;
+      margin-top: 20px;
+    }
+    .checkout-btn {
+      background-color: #000;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Your Cart</h1>
+
+  <div class="cart-container" id="cartItems">
+    <!-- Cart items will be dynamically added here -->
+  </div>
+
+  <p class="total-price">Total: Rs. <span id="totalAmount">0</span></p>
+
+  <a href="payment.html" class="checkout-btn" onclick="saveTotal()">Proceed to Checkout</a>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalAmount = 0;
+
+    function displayCart() {
+      const cartItemsDiv = document.getElementById('cartItems');
+      const totalAmountSpan = document.getElementById('totalAmount');
+      cartItemsDiv.innerHTML = '';
+      totalAmount = 0;
+
+      cart.forEach((item, index) => {
+        const cartItemDiv = document.createElement('div');
+        cartItemDiv.className = 'cart-item';
+        cartItemDiv.innerHTML = `
+          <span class="item-name">${item.product}</span>
+          <span class="item-price">Rs. ${(item.price * item.quantity).toFixed(2)}</span>
+          <span>Qty: ${item.quantity}</span>
+          <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+
+        cartItemsDiv.appendChild(cartItemDiv);
+        totalAmount += item.price * item.quantity;
+      });
+
+      totalAmountSpan.innerText = totalAmount.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      displayCart();
+    }
+
+    function saveTotal() {
+      localStorage.setItem('totalAmount', totalAmount.toFixed(2));
+    }
+
+    displayCart();
+  </script>
+
+</body>
+</html>

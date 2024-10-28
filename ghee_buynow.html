@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Address & Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #D2A15F; /* Ochre color */
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="email"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .payment-options {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #D2A15F; /* Ochre color */
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #b97d2c; /* Darker ochre */
+        }
+    </style>
+</head>
+<body>
+<a href="desighee.html"><button class="btn">Back</button></a>
+
+    <h2>Checkout - Address & Payment</h2>
+
+    <form action="payment-success.html" method="post">
+        <h3>Shipping Address</h3>
+        
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter your address" required>
+
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" placeholder="Enter your city" required>
+
+        <label for="postal">Postal Code</label>
+        <input type="text" id="postal" name="postal" placeholder="Enter your postal code" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <h3>Payment Options</h3>
+        
+        <div class="payment-options">
+            <input type="radio" id="credit-card" name="payment-method" value="credit-card" required>
+            <label for="credit-card">Credit Card</label><br>
+
+            <input type="radio" id="debit-card" name="payment-method" value="debit-card">
+            <label for="debit-card">Debit Card</label><br>
+
+            <input type="radio" id="cod" name="payment-method" value="cod">
+            <label for="cod">Cash on Delivery</label>
+        </div>
+
+        <button type="submit" class="btn">Proceed to Payment</button>
+    </form>
+
+</body>
+</html>
